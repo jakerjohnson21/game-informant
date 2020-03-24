@@ -1,7 +1,7 @@
 .main-container {
     display: flex;
     flex-direction: row;
-    min-height: 80%;
+    height: 80%;
 }
 
 .games-container {
@@ -17,12 +17,60 @@
 }
 
 .games-box {
+    display: flex;
+    flex-direction: column;
     border: 2px solid #cbcbcb;
     box-shadow: 2px 2px 3px grey;
     border-radius: 1rem;
     width: 100%;
     height: 100%;
 }
+
+.games-box-elements {
+    display: flex;
+    border: 2px solid red;
+    margin: 0 1rem;
+}
+
+.game-box-options{
+   margin-left: auto;
+}
+
+.games-grid-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+    padding: 1rem;
+    box-shadow: inset -2px -2px 3px grey;
+    border-radius: 1rem;
+    border: 2px solid #cbcbcb;
+    height: 100%;
+    justify-content: space-around;
+
+}
+
+.game-card{
+    display: flex;
+    flex-direction: column;
+    margin: .5rem;
+    box-shadow: inset -2px -2px 3px grey;
+    border-radius: 1rem;
+    border: 2px solid #cbcbcb;
+    padding: .5rem;
+    height: 10rem;
+}
+.game-card-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+img{
+    max-height: 50%;
+    border-radius: 1rem;
+}
+
 
 footer {
     border: 1px solid black;
