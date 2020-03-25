@@ -1,18 +1,20 @@
 .main-container {
+    
     display: flex;
     flex-direction: row;
     height: 80%;
 }
 
 .games-container {
+    border: 1px solid green;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem 2rem;
+    padding: 1rem;
 }
 
 .favorites-container {
-    padding: 2rem 2rem;
+    padding: 1rem;
    
 }
 
@@ -28,7 +30,6 @@
 
 .games-box-elements {
     display: flex;
-    border: 2px solid red;
     margin: 0 1rem;
 }
 
