@@ -46,6 +46,7 @@
     border: 2px solid #cbcbcb;
     height: 100%;
     justify-content: space-around;
+    overflow-y:auto;
 
 }
 
@@ -58,12 +59,17 @@
     border: 2px solid #cbcbcb;
     padding: .5rem;
     height: 10rem;
+    max-width: 8rem;
 }
 .game-card-title{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+    text-overflow: ellipsis;
+    max-width: 7rem;
+    text-align: center;
+    /*white-space: nowrap;*/
 }
 
 img{
