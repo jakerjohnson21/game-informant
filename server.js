@@ -22,6 +22,11 @@ app.use(bodyParser.json());
 
 
 
+
+
+
+
+
 app.listen(PORT, () => console.log(`game-informant app listening at http://localhost:${PORT}/`));
 
 
