@@ -1,5 +1,4 @@
 .main-container {
-    
     display: flex;
     flex-direction: row;
     height: 80%;
@@ -67,6 +66,7 @@
 .game-card > img {
     max-height: 50%;
     border-radius: 1rem;
+    border: 1px solid #6f6f6f;
 }
 
 .game-card-title{
@@ -91,7 +91,6 @@
 }
 
 .favorites-grid-container {
-    border: 1px solid green;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -115,9 +114,9 @@
 }
 
 .favorites-card > img {
+    border: 1px solid #6f6f6f;
     border-radius: 1rem;
     max-height: 75%;
-    border: 1px solid green;
 }
 
 .favorites-card-title {

@@ -66,6 +66,17 @@ app.get(`/api/v1/games`, (req,res) => {
 	});
 });
 
+app.post(`/api/v1/games`, (req, res) => {
+	db.Game.create(req.body, (err, newGame) => {
+		if (err) {
+			console.log(err);
+			return res.status(400);
+		}
+
+		console.log(newGame);
+	});
+});
+
 // Returns json object of specific game if found
 app.get(`/api/v1/games/:id`, (req,res) => {
 	db.Game.findById(req.params.id, (err, foundGame) => {
@@ -74,10 +85,55 @@ app.get(`/api/v1/games/:id`, (req,res) => {
 			return res.status(400).json({status: 400,
 			error: "Sorry something went wrong, please try again"});
 		}
-
 		res.json(foundGame);
 	});
 });
+
+app.put(`/api/v1/games/:id`, (req, res) => {
+	db.Game.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedGame) => {
+		if (err) {
+			console.log(err);
+		}
+
+		res.json(updatedGame);
+	});
+});
+
+app.delete(`/api/v1/games/:id`, (req, res) => {
+	db.Game.findByIdAndDelete(req.params.id, (err, result) => {
+		if (err) {
+			console.log(err);
+		}
+
+		res.json(result);
+	})
+});
+
+app.get(`/api/v1/users/:id`, (req, res) => {
+	db.User.findById(req.params.id, (err, foundUser) => {
+		if (err) {
+			console.log(err);
+			return res.status(400);
+		}
+
+		res.json(foundUser);
+	});
+});
+
+app.post(`/api/v1/users`, (req, res) => {
+	db.User.create(req.body, (err, newUser) => {
+		if (err) {
+			console.log(err);
+		}
+
+		res.json(newUser);
+	});
+})
+
+
+
+
+
 
 
 
