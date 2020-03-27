@@ -53,47 +53,35 @@ $(document).ready (function () {
 						);
 
 						 $(`#game-card-${response.results[i].id}`).on("click", () => {
-
-					    // $('#game-card-41494').popover({
-					    // 	 	html : true,
-					    //     trigger: 'manual',
-					    //     placement: 'right',
-					    //     container: 'body',
-					    //     title: `ALERT`,
-					    //     content: `Damn`
-					    // });
     					$(`#modal-${response.results[i].id}`).modal("show");
-          	// $('#game-card-41494').popover(`show`);
           });
 
           }
-
-
-         
-      //     $('#popover').popover({
-				  //   placement: 'bottom',
-				  //   content: image,
-				  //   html: true
-				  // });
-
         },
         error: function (thrownError) {
           console.log(thrownError);
         }
       });
 
-    //   $.ajax({
-    //     method: "GET",
-    //     url: "https://api.rawg.io/api/games/3498/twitch",
-    //     data: {
-    //       page_size: 10
-    //     },
-    //     success: function (response) {
-    //       console.log(response);
-    //     },
-    //     error: function (thrownError) {
-    //       console.log(thrownError);
-    //     }
-    //   });
+      $.ajax({
+        method: "GET",
+        url: "/api/v1/games",
+        success: function (res) {
+          console.log('api success');
+          console.log(res);
+          res.forEach((favoriteGame) => {
+            $('.favorites-grid-container').append(`
+              <div class='favorites-card'>
+                <img src="https://media.rawg.io/media/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg" alt="Pic">
+                <div class='favorites-card-title'>Title of Favorite Game</div>
+              </div>
+            `);
+          });
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    
 
 });
