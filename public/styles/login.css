@@ -16,3 +16,8 @@
     align-items: center;
 }
 
+#modalRegisterForm{
+    border-radius: 50px;
+    box-shadow: 2px 2px 3px grey;
+    padding: 1rem;
+}
