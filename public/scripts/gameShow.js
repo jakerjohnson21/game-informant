@@ -2,10 +2,13 @@ console.log("Game show linked and working!")
 
 $(document).ready (function () {
 
+	let url = window.location.pathname;
+	let gameId = url.substring(url.lastIndexOf('/') + 1);
+	console.log(gameId);
 	$.ajax({
 		method: "GET",
 
-		url: "https://api.rawg.io/api/games/290856",
+		url: `https://api.rawg.io/api/games/${gameId}`,
 
 		data: "data",
 
@@ -29,10 +32,10 @@ $(document).ready (function () {
 			$(`.game-info-container`).append(`<h5>Released: ${response.released}</h5>`);
 
 			for(let i=0; i < response.publishers.length; i++){
-				$(`.game-info-container`).append(`<h5>Publishers: ${response.publishers[i].name}`);
+				$(`.game-info-container`).append(`<h5>Publishers: ${response.publishers[i].name}</h5>`);
 			}
 
-			$(`.game-info-container`).append(`<h5>ESRB Rating: ${response.esrb_rating.name}`);
+			$(`.game-info-container`).append(`<h5>ESRB Rating: ${response.esrb_rating.name}</h5>`);
 	
 
 			let gameGenresText = '';
@@ -42,7 +45,7 @@ $(document).ready (function () {
 			}
 			$(`.game-info-container`).append(`<h5 id=gameGenres>Genres: ${gameGenresText}</h5)`);
 			//console.log(gameGenresText);
-			$(`.game-info-container`).append(`<h5 id=gameGenres>Website: <a href=${response.website}>${response.website}</a></h5)`);
+			$(`.game-info-container`).append(`<h5 id=gameWebsite> Website: <a href="${response.website}">${response.website}</a></h5)`);
 
 			$(`.game-description-container`).append(response.description);
 
