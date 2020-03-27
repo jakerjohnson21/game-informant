@@ -42,7 +42,7 @@ app.get(`/profile/:id`, (req,res) => {
 
 // Specifc Game Info
 app.get(`/games/:id`, (req,res) => {
-	res.sendFile(`views/games/gamesShow.html`, {
+	res.sendFile(`views/games/gameShow.html`, {
 		root: __dirname,
 	});
 });

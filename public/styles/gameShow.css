@@ -1,10 +1,17 @@
 .game-cover-image{
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
 	border: 2px solid #cbcbcb;
 	margin: 1rem .5rem 1rem 1rem;
   padding: 1rem;
 }
 
-.game-price-box{
+.game-price-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	text-align: center;
 	border: 2px solid #cbcbcb;
 	margin: 1rem .5rem 1rem 1rem;
   padding: 1rem;
@@ -14,6 +21,7 @@
 	border: 2px solid #cbcbcb;
 	margin: 1rem .5rem 1rem 1rem;
   padding: 1rem;
+  text-align: center;
 }
 
 .game-review-container{
@@ -36,13 +44,35 @@
 }
 
 .game-clips-container{
+	/*display: flex;*/
 	border: 2px solid #cbcbcb;
+	justify-content: center;
+	text-align: center;
 	flex-grow: 1;
 	max-width: 50%;
 	margin: 1rem;
 	/*width: 100%;*/
 	/*margin: 1rem .5rem 1rem 1rem;
   padding: 1rem;*/
+}
+
+.game-clips-title{
+	/*border: 2px solid red;*/
+}
+
+/*.game-clips-container-box{
+	/*display: flex;*/
+	/*border: 2px solid red;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+}*/
+
+.game-images-container{
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
 }
 
 .game-info-container{
@@ -61,4 +91,13 @@
 	display: flex;
 	/*border: 2px solid red;*/
 	justify-content: space-between;
+}
+
+.game-info-container{
+	text-align: center;
+}
+
+.game-info-container h5{
+	text-align: left;
+	border: 2px solid red;
 }
