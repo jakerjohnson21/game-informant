@@ -95,11 +95,11 @@
     flex-direction: column;
     height: 100%;
     margin: 1rem;
-    padding: .5rem;
     box-shadow: inset 2px 2px 5px grey;
     border-radius: 1rem;
     border: 2px solid #cbcbcb;
-    overflow-y:auto;
+    overflow-y: auto;
+    padding: 1rem;
 }
 
 .favorites-card {

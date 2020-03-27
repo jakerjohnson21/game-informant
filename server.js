@@ -73,7 +73,7 @@ app.post(`/api/v1/games`, (req, res) => {
 			return res.status(400);
 		}
 
-		console.log(newGame);
+		res.json(newGame);
 	});
 });
 
