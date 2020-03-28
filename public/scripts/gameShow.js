@@ -18,17 +18,35 @@ $(document).ready (function () {
 			$(".game-title-container").append(`<h1>${response.name}</h1>`);
 
 			for(let i=0; i < response.stores.length; i++){
-				$(".game-price-container").
-				append(`<h5><a href="${response.stores[i].url}">${response.stores[i].store.name}</a></h5>`);
+
+				if(response.stores[i].store.id == 3){
+					$(".game-price-container").
+					append(`<h5><a href="${response.stores[i].url}">${response.stores[i].store.name} </a><i class="fab fa-playstation"></i></h5>`);
+				}else if(response.stores[i].store.id == 2){
+					$(".game-price-container").
+					append(`<h5><a href="${response.stores[i].url}">${response.stores[i].store.name} </a><i class="fab fa-windows"></i></h5>`);
+				}else if(response.stores[i].store.id == 7){
+					$(".game-price-container").
+					append(`<h5><a href="${response.stores[i].url}">${response.stores[i].store.name} </a><i class="fab fa-xbox"></i></h5>`);
+				}
+				else if(response.stores[i].store.id == 1){
+					$(".game-price-container").
+					append(`<h5><a href="${response.stores[i].url}">${response.stores[i].store.name} </a><i class="fab fa-steam"></i></h5>`);
+				}else{
+					$(".game-price-container").
+					append(`<h5><a href="${response.stores[i].url}">${response.stores[i].store.name} </a></h5>`);
+				}
+			
 			}
+				
 
 			$(".game-clips-container-box").append(`<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="${response.clip.clip}" allowfullscreen></iframe>
-</div>`)
+  			<iframe class="embed-responsive-item" src="${response.clip.clip}" allowfullscreen></iframe>
+				</div>`)
 
 			$(`.game-images-container`).append(`<img src=${response.background_image_additional}>`);
 
-			$(`.game-info-container`).append(`<h5>Rating: ${response.rating}</h5>`);
+			$(`.game-info-container`).append(`<h5>Rating: ${response.rating} </h5>`);
 			$(`.game-info-container`).append(`<h5>Released: ${response.released}</h5>`);
 
 			for(let i=0; i < response.publishers.length; i++){
