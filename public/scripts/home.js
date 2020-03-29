@@ -21,6 +21,10 @@ $(document).ready (function () {
     // data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
     // <button type="submit" class="btn btn-primary">Submit</button>
     // <button type="submit">Submit</button>
+
+
+
+
     $.ajax({
         method: "GET",
         url: "https://api.rawg.io/api/games?dates=2020-01-01,2020-10-10&ordering=-added",
@@ -57,6 +61,7 @@ $(document).ready (function () {
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                       <button type="button" id="favBtn-${response.results[i].id}" class="btn btn-primary btn-sm">Favorite</button>
+                      <a href="/games/${response.results[i].id}"><button type="button" id="viewMoreBtn-${response.results[i].id}" class="btn btn-info btn-sm">View More</button></a>
                     </div>
                   </div>
                 </div>
@@ -175,5 +180,36 @@ $(document).ready (function () {
     //       console.log(thrownError);
     //     }
     //   });
+
+        $("#searchBtn").on("click", (e) => {
+    e.preventDefault()
+    console.log("Running ajax call...");
+    //location.href = "/search/"
+    $.ajax({
+      method: "GET",
+
+      url: `https://api.rawg.io/api/games?search=` + $("#searchBox").val(),
+
+      data: "data",
+
+      success: (response) => {
+        console.log(response);
+        // location.href = "/search/";
+        $("main").empty();
+
+        $("main").append(`<h3 id="searchResultsTitle"> Search Results: </h3>`);
+        $("main").append(`<div class="resultsContainer"></div>`);
+
+        for(let i=0; i < response.results.length; i++){
+          $(".resultsContainer").append(`<a href="/games/${response.results[i].id}"><h5 id="searchResults">${response.results[i].name}</h5></a></br>`);
+        }
+      },
+
+      error: (err) => {
+        alert(err);
+      },
+    });
+    // location.href = "/search/";
+  });
 
 });
