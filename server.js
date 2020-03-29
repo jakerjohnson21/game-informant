@@ -47,6 +47,19 @@ app.get(`/games/:id`, (req,res) => {
 	});
 });
 
+app.get(`/search/`, (req,res) => {
+	res.sendFile('views/gameSearch.html', {
+		root: __dirname,
+	});
+});
+
+// Redirect to home page if no seatch id is present
+// app.get(`/search`, (req,res) => {
+// 	res.sendFile('views/home.html', {
+// 		root: __dirname,
+// 	});
+// });
+
 // Redirect to homes if no id is present
 app.get(`/games`, (req,res) => {
 	res.sendFile(`views/home.html`, {

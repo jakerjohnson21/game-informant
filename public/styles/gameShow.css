@@ -139,3 +139,13 @@
 	margin-top: 1rem;
 	width: 100%;
 }
+
+#searchResultsTitle{
+	margin: 3rem .5rem 1rem 1rem;
+  padding: 1rem;
+}
+
+.resultsContainer{
+	margin: 3rem .5rem 1rem 1rem;
+  padding: 1rem;
+}

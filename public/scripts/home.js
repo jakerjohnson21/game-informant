@@ -57,6 +57,7 @@ $(document).ready (function () {
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                       <button type="button" id="favBtn-${response.results[i].id}" class="btn btn-primary btn-sm">Favorite</button>
+                      <a href="/games/${response.results[i].id}"><button type="button" id="viewMoreBtn-${response.results[i].id}" class="btn btn-info btn-sm">View More</button></a>
                     </div>
                   </div>
                 </div>
