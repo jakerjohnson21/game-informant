@@ -25,6 +25,7 @@ $(document).ready (function () {
 
 			success: (response) => {
 				console.log("Success");
+				location.href = "/home";
 			},
 
 			error: (err) => {
