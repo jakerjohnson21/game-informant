@@ -4,27 +4,6 @@ console.log('home view');
 
 $(document).ready (function () {
     
-    // $("[data-toggle=popover]").popover();
-    // $('#game-card-41494').popover(options)
-    // data-content="This is the body of Popover"
-  //  data-original-title="Creativity Tuts" rel="popover"
-
-  // $('[data-toggle="popover"]').each(function () {
-  //       if (!$(this).is(e.target) && 
-  //            $(this).has(e.target).length === 0 && 
-  //            $('.popover').has(e.target).length === 0) {
-  //           $(this).popover('hide');
-  //       }
-  //   });
-
-    // <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" 
-    // data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-    // <button type="submit" class="btn btn-primary">Submit</button>
-    // <button type="submit">Submit</button>
-
-
-
-
     $.ajax({
         method: "GET",
         url: "https://api.rawg.io/api/games?dates=2020-01-01,2020-10-10&ordering=-added",
@@ -78,29 +57,15 @@ $(document).ready (function () {
                 data: "data",
 
                 success: (response) => {
-                  //console.log(response);
-                  //console.log(`Modal:  #modal-body-${response.id}`)
+                  console.log(response);
                   $(`.modal-body-${response.id}`).append(response.description);
-                  // alert("YAY");
                 },
 
                 error: (err) => {
                   alert("Damn");
                 },
               });
-
-
-              // $(`#game-card-${response.results[i].id}`).popover({
-              //    html : true,
-              //     trigger: 'focus',
-              //     placement: 'right',
-              //     title: `${response.results[i].name}`,
-              //     content: `<strong><a href="">Favorite</a></strong><br><strong><a href="/api/v1/games/${response.results[i].id}">View More</a></strong><button>Hello</button>`
-              // });
               $(`#modal-${response.results[i].id}`).modal("show");
-         //     $(`#game-card-${response.results[i].id}`).popover(`show`);
-
-              // $(`#game-card-${response.results[i].id}`).popover(`hide`);
           });
 
             $(`#favBtn-${response.results[i].id}`).on("click", (e) => {
@@ -116,70 +81,69 @@ $(document).ready (function () {
                 data: JSON.stringify({
                         name: `${response.results[i].name}`, 
                         rating: `${response.results[i].rating}`,
-                        screenShots: ["abc.jpg"],
                         videoClips: ["cde.mp4"],
-                        coverImage: "mycover.jpg",
+                        coverImage: response.results[i].background_image,
                         platforms: ["PS4"],
                         price: "55.99",
                       }),
 
                 success: (response) => {
-                  alert("Yay");
-                  console.log(`Fav ${response}`);
-                  //console.log(`Modal:  #modal-body-${response.id}`)
-                  // $(`.modal-body-${response.id}`).append(response.description);
-                  alert("YAY");
+
                 },
 
                 error: (err) => {
                   alert("Damn");
                 },
               });
-
-              // db.Game.find({}, (err,allGames) => {
-              //     if(err){
-              //       console.log(`Error displaying games: `, err);
-              //       process.exit();
-              //     }
-
-              //     console.log(`Database: `, allGames);
-              //     process.exit();
-              //   })
-              
-
             });
-
-
-
           }
-
-
-         
-      //     $('#popover').popover({
-          //   placement: 'bottom',
-          //   content: image,
-          //   html: true
-          // });
-
         },
         error: function (thrownError) {
           console.log(thrownError);
         }
       });
 
-    //   $.ajax({
-    //     method: "GET",
-    //     url: "https://api.rawg.io/api/games/3498/twitch",
-    //     data: {
-    //       page_size: 10
-    //     },
-    //     success: function (response) {
-    //       console.log(response);
-    //     },
-    //     error: function (thrownError) {
-    //       console.log(thrownError);
-    //     }
-    //   });
+      $.ajax({
+        method: "GET",
+        url: "/api/v1/games",
+        success: function (res) {
+          console.log('api success');
+          console.log(res);
+          res.forEach((favoriteGame) => {
+            console.log(favoriteGame);
+            $('.favorites-grid-container').append(`
+              <div class='favorites-card' id='${favoriteGame._id}'>
+                <img src="${favoriteGame.coverImage}" alt="Pic">
+                <div class='favorites-card-title'>${favoriteGame.name}</div>
+                <div class='favorites-card-delete-button'>&#x2715;</div>
+              </div>
+            `);
+          });
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+
+      let favoritesContainer = document.querySelector('.favorites-grid-container');
+      favoritesContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('favorites-card-delete-button')) {
+          console.log(event.target.parentNode.id);
+
+          $.ajax({
+            method: "DELETE",
+            url: `/api/v1/games/${event.target.parentNode.id}`,
+            success: function (res) {
+              console.log('delete success');
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
+        }
+      });
+    
+
 
         $("#searchBtn").on("click", (e) => {
     e.preventDefault()

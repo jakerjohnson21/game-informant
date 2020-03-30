@@ -11,7 +11,7 @@ const GameSchema = new mongoose.Schema({
     videoClips: [String],
     coverImage: String,
     platforms: [String],
-    price: String
+    userComment: String
 });
 
 const Game = mongoose.model('Game', GameSchema);
