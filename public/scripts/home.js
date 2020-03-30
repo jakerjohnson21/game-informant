@@ -127,8 +127,18 @@ $(document).ready (function () {
       let favoritesContainer = document.querySelector('.favorites-grid-container');
       favoritesContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('favorites-card-delete-button')) {
-          console.log('boop');
           console.log(event.target.parentNode.id);
+
+          $.ajax({
+            method: "DELETE",
+            url: `/api/v1/games/${event.target.parentNode.id}`,
+            success: function (res) {
+              console.log('delete success');
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
         }
       });
     
