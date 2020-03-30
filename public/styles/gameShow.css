@@ -85,10 +85,14 @@
   padding: 1rem;
 }
 
-.game-twitch-streams{
+.user-comment-box{
 	border: 2px solid #cbcbcb;
 	margin: 1rem .5rem 1rem 1rem;
-  padding: 1rem;
+  	padding: 1rem;
+}
+
+.user-comment-title {
+	font-size: 1.5vw;
 }
 
 .media-container{
