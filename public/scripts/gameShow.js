@@ -46,13 +46,14 @@ $("#searchBtn").on("click", (e) => {
 			console.log(response);
 			$(".game-cover-image").append(`<img src=${response.background_image}>`);
 			$(".game-title-container").append(`<h1>${response.name}</h1>`);
-			$(".game-title-container").append(`<button type="button" id="favBtn-gameShow" class="btn btn-primary btn-sm">Favorite</button>`);
+			$(".game-title-container").append(`<button type="button" id="favBtn-gameShow" class="btn btn-primary btn-sm">Favorite <i class="far fa-heart"></i></button>`);
 
 
       $(`#favBtn-gameShow`).on("click", (e) => {
-        console.log("Fav button response: ", response.id);
         e.preventDefault();
         e.stopPropagation();
+        $(`i`).removeClass("far fa-heart");
+        $(`i`).addClass("fas fa-heart");
         $.ajax({
           method: "POST",
 
@@ -65,8 +66,6 @@ $("#searchBtn").on("click", (e) => {
                   rating: `${response.rating}`,
                   gameId: `${response.id}`,
                   coverImage: response.background_image,
-                  platforms: ["PS4"],
-                  price: "55.99",
                 }),
 
           success: (response) => {
@@ -138,8 +137,8 @@ $("#searchBtn").on("click", (e) => {
 
 		},
 
-		error: (response) => {
-			alert("Damn");
+		error: (err) => {
+			console.log(err);
 		},
 
 	});
