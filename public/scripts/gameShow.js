@@ -4,7 +4,6 @@ $(document).ready (function () {
 
 	let url = window.location.pathname;
 	let gameId = url.substring(url.lastIndexOf('/') + 1);
-	console.log(gameId);
 
 $("#searchBtn").on("click", (e) => {
 		e.preventDefault()
@@ -18,8 +17,6 @@ $("#searchBtn").on("click", (e) => {
 			data: "data",
 
 			success: (response) => {
-				console.log(response);
-				// location.href = "/search/";
 				$("main").empty();
 
 				$("main").append(`<h3 id="searchResultsTitle"> Search Results: </h3>`);
