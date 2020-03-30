@@ -115,7 +115,8 @@ app.put(`/api/v1/games/:id`, (req, res) => {
 app.delete(`/api/v1/games/:id`, (req, res) => {
 	db.Game.findByIdAndDelete(req.params.id, (err, result) => {
 		if (err) {
-			console.log(err);
+			return res.status(400).json({status: 400,
+			error: "Sorry something went wrong, please try again"});
 		}
 
 		res.json(result);
