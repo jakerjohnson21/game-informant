@@ -13,3 +13,7 @@ const UserSchema = new mongoose.Schema({
     age: Number, 
     favoriteGames: [Game.schema]
 });
+
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;
