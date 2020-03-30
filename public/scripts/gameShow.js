@@ -1,3 +1,4 @@
+
 console.log("Game show linked and working!")
 
 $(document).ready (function () {
@@ -34,6 +35,18 @@ $("#searchBtn").on("click", (e) => {
 		// location.href = "/search/";
 	});
 
+	$.ajax({
+		method: "GET",
+		url: `/api/v1/games/${gameId}`,
+		success: function (res) {
+			console.log(res);
+			$(".user-comment").text(res.userComment);
+		},
+		error: function (err) {
+			console.log(err);
+		}
+	});
+
 
 	$.ajax({
 		method: "GET",
@@ -44,10 +57,10 @@ $("#searchBtn").on("click", (e) => {
 
 		success: (response) => {
 			console.log(response);
+			gameName = response.name;
 			$(".game-cover-image").append(`<img src=${response.background_image}>`);
 			$(".game-title-container").append(`<h1>${response.name}</h1>`);
 			$(".game-title-container").append(`<button type="button" id="favBtn-gameShow" class="btn btn-primary btn-sm">Favorite <i class="far fa-heart"></i></button>`);
-
 
       $(`#favBtn-gameShow`).on("click", (e) => {
         e.preventDefault();
@@ -65,7 +78,8 @@ $("#searchBtn").on("click", (e) => {
                   name: `${response.name}`, 
                   rating: `${response.rating}`,
                   gameId: `${response.id}`,
-                  coverImage: response.background_image,
+				  coverImage: response.background_image,
+				  userComment: ''
                 }),
 
           success: (response) => {
@@ -127,7 +141,6 @@ $("#searchBtn").on("click", (e) => {
 			let gameGenresText = '';
 			for(let i =0; i < response.genres.length; i++){
 				gameGenresText += `${response.genres[i].name}` + ",";
-				console.log(gameGenresText);
 			}
 			$(`.game-info-container`).append(`<h5 id=gameGenres>Genres: ${gameGenresText}</h5)`);
 			//console.log(gameGenresText);
@@ -142,7 +155,7 @@ $("#searchBtn").on("click", (e) => {
 		},
 
 	});
-	$("#success-alert").hide();
+$("#success-alert").hide();
   $("#danger-alert").hide();
 
   function showSuccessAlert() {
@@ -156,4 +169,26 @@ $("#searchBtn").on("click", (e) => {
                   $("#danger-alert").slideUp(500);
                 });
   }
-})
+
+  $('#commentButton').on('click', (e) => {
+	e.preventDefault();
+	let comment = $('#commentInput').val();
+	
+	$.ajax({
+		method: 'PUT',
+		url: `/api/v1/games/${gameId}`,
+		data: {
+			userComment: comment
+		},
+		success: function (res) {
+			console.log('Comment posted successfully');
+			$('.user-comment').text(comment);
+		},
+		error: function (err) {
+			console.log(err);
+		}
+	});
+
+  });
+
+});

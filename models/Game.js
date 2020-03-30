@@ -9,9 +9,8 @@ const GameSchema = new mongoose.Schema({
     releaseDate: Date,
     rating: Number,
     coverImage: String,
-    screenShots: [String],
-    videoClips: [String],
-    platforms: [String],
+    userComment: String
+
 });
 
 const Game = mongoose.model('Game', GameSchema);

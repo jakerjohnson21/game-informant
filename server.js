@@ -9,6 +9,7 @@ const DB_URI = process.env.MONGODB || `mongodb://localhost:27017/game-informant`
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(`${__dirname}/public`));
 
@@ -92,7 +93,7 @@ app.post(`/api/v1/games`, (req, res) => {
 
 // Returns json object of specific game if found
 app.get(`/api/v1/games/:id`, (req,res) => {
-	db.Game.findById(req.params.id, (err, foundGame) => {
+	db.Game.findOne({gameId: req.params.id}, (err, foundGame) => {
 		if(err){
 			console.log(`ID: `, req.params.id);
 			return res.status(400).json({status: 400,
@@ -103,11 +104,13 @@ app.get(`/api/v1/games/:id`, (req,res) => {
 });
 
 app.put(`/api/v1/games/:id`, (req, res) => {
-	db.Game.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedGame) => {
+	console.log(req.body);
+	db.Game.findOneAndUpdate({gameId: req.params.id}, req.body, {new: true}, (err, updatedGame) => {
 		if (err) {
 			console.log(err);
 		}
 
+		console.log('Updated');
 		res.json(updatedGame);
 	});
 });
