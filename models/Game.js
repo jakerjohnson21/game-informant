@@ -5,13 +5,13 @@ const GameSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    gameId: String,
     releaseDate: Date,
     rating: Number,
+    coverImage: String,
     screenShots: [String],
     videoClips: [String],
-    coverImage: String,
     platforms: [String],
-    userComment: String
 });
 
 const Game = mongoose.model('Game', GameSchema);

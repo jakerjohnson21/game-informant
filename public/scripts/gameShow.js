@@ -4,7 +4,6 @@ $(document).ready (function () {
 
 	let url = window.location.pathname;
 	let gameId = url.substring(url.lastIndexOf('/') + 1);
-	console.log(gameId);
 
 $("#searchBtn").on("click", (e) => {
 		e.preventDefault()
@@ -18,8 +17,6 @@ $("#searchBtn").on("click", (e) => {
 			data: "data",
 
 			success: (response) => {
-				console.log(response);
-				// location.href = "/search/";
 				$("main").empty();
 
 				$("main").append(`<h3 id="searchResultsTitle"> Search Results: </h3>`);
@@ -49,7 +46,38 @@ $("#searchBtn").on("click", (e) => {
 			console.log(response);
 			$(".game-cover-image").append(`<img src=${response.background_image}>`);
 			$(".game-title-container").append(`<h1>${response.name}</h1>`);
+			$(".game-title-container").append(`<button type="button" id="favBtn-gameShow" class="btn btn-primary btn-sm">Favorite</button>`);
 
+
+      $(`#favBtn-gameShow`).on("click", (e) => {
+        console.log("Fav button response: ", response.id);
+        e.preventDefault();
+        e.stopPropagation();
+        $.ajax({
+          method: "POST",
+
+          url: `/api/v1/games`,
+
+          contentType: "application/json; charset=utf-8",
+
+          data: JSON.stringify({
+                  name: `${response.name}`, 
+                  rating: `${response.rating}`,
+                  gameId: `${response.id}`,
+                  coverImage: response.background_image,
+                  platforms: ["PS4"],
+                  price: "55.99",
+                }),
+
+          success: (response) => {
+            showSuccessAlert()
+          },
+
+          error: (err) => {
+            console.log("Error: ", err);
+          },
+        });
+      });
 			for(let i=0; i < response.stores.length; i++){
 
 				if(response.stores[i].store.id == 3){
@@ -73,9 +101,12 @@ $("#searchBtn").on("click", (e) => {
 			}
 				
 
-			$(".game-clips-container-box").append(`<div class="embed-responsive embed-responsive-16by9">
+			if(response.clip !== null){
+					$(".game-clips-container-box").append(`<div class="embed-responsive embed-responsive-16by9">
   			<iframe class="embed-responsive-item" src="${response.clip.clip}" allowfullscreen></iframe>
 				</div>`)
+			}
+			
 
 			$(`.game-images-container`).append(`<img src=${response.background_image_additional}>`);
 
@@ -86,8 +117,13 @@ $("#searchBtn").on("click", (e) => {
 				$(`.game-info-container`).append(`<h5>Publishers: ${response.publishers[i].name}</h5>`);
 			}
 
-			$(`.game-info-container`).append(`<h5>ESRB Rating: ${response.esrb_rating.name}</h5>`);
-	
+				$(`.game-description-container`).append(response.description);
+
+			if(response.esrb_rating !== null){
+					$(`.game-info-container`).append(`<h5>ESRB Rating: ${response.esrb_rating.name}</h5>`);
+			}
+
+		
 
 			let gameGenresText = '';
 			for(let i =0; i < response.genres.length; i++){
@@ -98,7 +134,7 @@ $("#searchBtn").on("click", (e) => {
 			//console.log(gameGenresText);
 			$(`.game-info-container`).append(`<h5 id=gameWebsite> Website: <a href="${response.website}">${response.website}</a></h5)`);
 
-			$(`.game-description-container`).append(response.description);
+		
 
 		},
 
@@ -107,4 +143,18 @@ $("#searchBtn").on("click", (e) => {
 		},
 
 	});
+	$("#success-alert").hide();
+  $("#danger-alert").hide();
+
+  function showSuccessAlert() {
+  $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+                  $("#success-alert").slideUp(500);
+                });
+  }
+
+  function showDangerAlert() {
+  $("#danger-alert").fadeTo(2000, 500).slideUp(500, function() {
+                  $("#danger-alert").slideUp(500);
+                });
+  }
 })

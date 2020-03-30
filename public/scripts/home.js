@@ -3,7 +3,7 @@ console.log('home view');
 // const db = require(`./models`);
 
 $(document).ready (function () {
-    
+
     $.ajax({
         method: "GET",
         url: "https://api.rawg.io/api/games?dates=2020-01-01,2020-10-10&ordering=-added",
@@ -57,18 +57,18 @@ $(document).ready (function () {
                 data: "data",
 
                 success: (response) => {
-                  console.log(response);
                   $(`.modal-body-${response.id}`).append(response.description);
                 },
 
                 error: (err) => {
-                  alert("Damn");
+                  console.log(err);
                 },
               });
               $(`#modal-${response.results[i].id}`).modal("show");
           });
 
             $(`#favBtn-${response.results[i].id}`).on("click", (e) => {
+              console.log("Fav button response: ", response.results[i].id);
               e.preventDefault();
               e.stopPropagation();
               $.ajax({
@@ -81,18 +81,25 @@ $(document).ready (function () {
                 data: JSON.stringify({
                         name: `${response.results[i].name}`, 
                         rating: `${response.results[i].rating}`,
-                        videoClips: ["cde.mp4"],
+                        gameId: `${response.results[i].id}`,
                         coverImage: response.results[i].background_image,
-                        platforms: ["PS4"],
-                        price: "55.99",
                       }),
 
                 success: (response) => {
-
+                  console.log(response);
+                    $('.favorites-grid-container').append(`
+              <div class='favorites-card' id='${response._id}'>
+                <img src="${response.coverImage}" alt="Pic">
+                <div class='favorites-card-title'>${response.name}</div>
+                <div class='favorites-card-delete-button'>&#x2715;</div>
+              </div>
+            `);
+                  $('.modal').modal('hide');
+                  showSuccessAlert()
                 },
 
                 error: (err) => {
-                  alert("Damn");
+                  console.log("Error: ", err);
                 },
               });
             });
@@ -135,6 +142,8 @@ $(document).ready (function () {
             url: `/api/v1/games/${event.target.parentNode.id}`,
             success: function (res) {
               console.log('delete success');
+              $(`#${res._id}`).remove();
+              showDangerAlert();
             },
             error: function (err) {
               console.log(err);
@@ -145,35 +154,50 @@ $(document).ready (function () {
     
 
 
-        $("#searchBtn").on("click", (e) => {
-    e.preventDefault()
-    console.log("Running ajax call...");
-    //location.href = "/search/"
-    $.ajax({
-      method: "GET",
+    $("#searchBtn").on("click", (e) => {
+        e.preventDefault()
+        console.log("Running ajax call...");
+        //location.href = "/search/"
+        $.ajax({
+          method: "GET",
 
-      url: `https://api.rawg.io/api/games?search=` + $("#searchBox").val(),
+          url: `https://api.rawg.io/api/games?search=` + $("#searchBox").val(),
 
-      data: "data",
+          data: "data",
 
-      success: (response) => {
-        console.log(response);
-        // location.href = "/search/";
-        $("main").empty();
+          success: (response) => {
+            console.log(response);
+            // location.href = "/search/";
+            $("main").empty();
 
-        $("main").append(`<h3 id="searchResultsTitle"> Search Results: </h3>`);
-        $("main").append(`<div class="resultsContainer"></div>`);
+            $("main").append(`<h3 id="searchResultsTitle"> Search Results: </h3>`);
+            $("main").append(`<div class="resultsContainer"></div>`);
 
-        for(let i=0; i < response.results.length; i++){
-          $(".resultsContainer").append(`<a href="/games/${response.results[i].id}"><h5 id="searchResults">${response.results[i].name}</h5></a></br>`);
-        }
-      },
+            for(let i=0; i < response.results.length; i++){
+              $(".resultsContainer").append(`<a href="/games/${response.results[i].id}"><h5 id="searchResults">${response.results[i].name}</h5></a></br>`);
+            }
+          },
 
-      error: (err) => {
-        alert(err);
-      },
-    });
+          error: (err) => {
+            console.log(err);
+          },
+        });
     // location.href = "/search/";
   });
+
+  $("#success-alert").hide();
+  $("#danger-alert").hide();
+
+  function showSuccessAlert() {
+  $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+                  $("#success-alert").slideUp(500);
+                });
+  }
+
+  function showDangerAlert() {
+  $("#danger-alert").fadeTo(2000, 500).slideUp(500, function() {
+                  $("#danger-alert").slideUp(500);
+                });
+  }
 
 });
