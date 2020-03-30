@@ -145,21 +145,7 @@ app.post(`/api/v1/users`, (req, res) => {
 
 		res.json(newUser);
 	});
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 app.listen(PORT, () => console.log(`game-informant app listening at http://localhost:${PORT}/`));
 
