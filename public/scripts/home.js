@@ -39,7 +39,7 @@ $(document).ready (function () {
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                      <button type="button" id="favBtn-${response.results[i].id}" class="btn btn-primary btn-sm">Favorite</button>
+                      <button type="button" id="favBtn-${response.results[i].id}" class="btn btn-primary btn-sm">Favorite <i class="far fa-heart"></i></button>
                       <a href="/games/${response.results[i].id}"><button type="button" id="viewMoreBtn-${response.results[i].id}" class="btn btn-info btn-sm">View More</button></a>
                     </div>
                   </div>
@@ -86,7 +86,8 @@ $(document).ready (function () {
                       }),
 
                 success: (response) => {
-                  console.log(response);
+                    $(`i`).removeClass("far fa-heart");
+                    $(`i`).addClass("fas fa-heart");
                     $('.favorites-grid-container').append(`
               <div class='favorites-card' id='${response._id}'>
                 <img src="${response.coverImage}" alt="Pic">
@@ -121,7 +122,7 @@ $(document).ready (function () {
             $('.favorites-grid-container').append(`
               <div class='favorites-card' id='${favoriteGame._id}'>
                 <img src="${favoriteGame.coverImage}" alt="Pic">
-                <div class='favorites-card-title'>${favoriteGame.name}</div>
+                <div class='favorites-card-title'><a href="/games/${favoriteGame.gameId}">${favoriteGame.name}</a></div>
                 <div class='favorites-card-delete-button'>&#x2715;</div>
               </div>
             `);
