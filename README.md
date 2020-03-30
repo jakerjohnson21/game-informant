@@ -44,17 +44,18 @@ User selecting clicking specific game:
 - Search results show up which are clickable
 - Selecting specific games's hyperlinks takes you to in-depth game information page
 
-## The Approach Taken
-Intially the word was choosen by me, to make it more difficult and dynamic I choose to obtain random words from an API. Once this word is retrieved I create the empty div elements with black bottoms borders on bottom to simulate a empty word bank. I create divs according to the letter for the word, so one empty div for each letter. Then I generate the buttons with corresponding alphabet letters as their values. Once the user clicks on a button I check to see if that letter appears in the word and find all placements of that button and place the letter to its div element. If player guesses the letter wrong I update the image to add a piece of body part and decrease their remaining turns. 
 
-## Screenshots
-![GameScreenshot](https://github.com/ajay-k/hangman/blob/master/images/hangmanGame.png)
 
 ## Wireframe (Prototype)
-![WireFrame](https://github.com/ajay-k/hangman/blob/master/images/State1.png)
+![Login](https://github.com/jakerjohnson21/game-informant/blob/submaster/screenshots/loginWireFrame.png?raw=true)
 
-## Known Bugs / Unsolved Problems
-When resizing the browser window the animiation may animate the letter to the wrong location, but the correct letter will appear on the word bank.
+![Home](https://github.com/jakerjohnson21/game-informant/blob/submaster/screenshots/homePage.png?raw=true)
+
+![GameShow](https://github.com/jakerjohnson21/game-informant/blob/submaster/screenshots/homePage.png?raw=true)
+
+![Models](https://github.com/jakerjohnson21/game-informant/blob/submaster/screenshots/modelsERD.png?raw=true)
+
+
 
 ## Sources
-[Random Word API](https://github.com/RazorSh4rk/random-word-api)
+[RAWG Game Database API](https://rawg.io/apidocs)
