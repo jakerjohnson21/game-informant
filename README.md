@@ -8,22 +8,8 @@ Game-informant is a website developed using **HTML**, **Javascript**, **CSS**,  
 ## Index
 - [Scope](#Scope)
 - [User Stories](#user-stories)
-- [Wireframes](#wireframes)
-- [Data Models](#data-models)
-- [Milestones](#milestones)
-
- __Option 1:__
-
-```Download zip from this repository ```
- 
- ___OR___   Clone Repo: ```https://github.com/ajay-k/hangman.git: ```
 
 
-Then, open __index.html__ using Firefox or Google Chrome.
-
- __Option 2:__
- 
-[Hangman Github Pages](https://ajay-k.github.io/hangman/)
 
 ## User Stories
 
